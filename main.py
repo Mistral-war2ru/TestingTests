@@ -1,5 +1,3 @@
-import os
-import signal
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
@@ -32,11 +30,3 @@ def get_user(name, age):
 @app.get("/notfound", status_code=404) #http://127.0.0.1:8000/notfound
 def notfound():
     return  {"message": "Resource Not Found"}
-
-def stop_server():
-    pid = os.getpid()
-    os.kill(pid, signal.SIGINT)
-
-@app.get("/stop") #http://127.0.0.1:8000/stop
-def stop():
-	stop_server()

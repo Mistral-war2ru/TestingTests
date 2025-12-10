@@ -1,6 +1,10 @@
 import unittest
 import json
 import requests
+import os
+import signal
+import uvicorn
+from main import app
 
 url = "http://127.0.0.1:8000"
 
@@ -18,4 +22,7 @@ class AppTests(unittest.TestCase):
 		r = requests.get(url+'/stop')
 		
 if __name__ == '__main__':
+	uvicorn.run(app, host="127.0.0.1", port=8000)
     unittest.main()
+	pid = os.getpid()
+    os.kill(pid, signal.SIGINT)
